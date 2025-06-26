@@ -5,6 +5,7 @@ from .models import Customer
 from django.contrib import messages
 # Create your views here.
 def signout(request):
+    
     logout(request)
     return redirect('home')
 
@@ -25,6 +26,7 @@ def show_account(request):
                                     email=email,)
             #create customer 
             Customer.objects.create(user=user,
+                                    name=username,
                                     address=address,
                                     phone=phone)
             

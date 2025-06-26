@@ -1,0 +1,48 @@
+ {% load static %}
+
+ <div class="small-container cart-page">
+    {% if orders %}
+       
+
+        <table>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Total price </th>
+                <th>Satus</th>
+                <th>Product</th>
+              
+                
+            </tr>
+             {% for order in orders %}
+            <tr>
+             <td>{{ order.id }}</td>
+             <td>{{ order.created_at }}</td>
+             <td>${{ order.total_price }}</td>
+             <td>{{ order.order_status }}</td>
+              <td>
+            <ul>
+              {% for item in order.added_items.all %}
+                <li style="margin-bottom: 10px;">
+                    <a href="{% url 'detail_product' item.product.id %}">
+                  <img src="{{ item.product.images.url }}" width="70" height="70" style="border-radius: 5px;" /></a>
+                  <strong>{{ item.product.Title }}</strong><br>
+                  Qty: {{ item.quantity }}<br>
+                  Size: {{ item.size }}
+                </li>
+              {% endfor %}
+            </ul>
+          </td>
+            
+            </tr>
+            {% endfor %}
+  
+
+        </table>
+       {% else %}
+       <h3>No Orders!
+         Order Now </h3>
+         {% endif %}
+    </div>
+
+    

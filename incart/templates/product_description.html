@@ -9,7 +9,10 @@
                 <p>{{ product.Title }}</p>
                 <h1>{{ product.Title }}</h1>
                 <h4>{{ product.price }}</h4>
-                <select>
+                <form action="{% url 'add_to_cart' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ product.id }}" name="product_id">
+                <select name="size" required>
                     <option>Select Size</option>
                     <option>XXL</option>
                     <option>XL</option>
@@ -17,9 +20,9 @@
                     <option>M</option>
                     <option>S</option>
                 </select>
-                <input type="number" value="1">
-                <a href="" class="btn">Add To Cart</a>
-
+                <input type="number" value="1" name="quantity">
+                <button style="background-color:  #ff523b;" class="btn">Add To Cart</button>
+                </form>
                 <h3>Product Details <i class="fa fa-indent"></i></h3>
                 <br>
                 <p>
